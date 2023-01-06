@@ -1,0 +1,29 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "kafka-cluster:AlterGroup",
+                "kafka-cluster:ReadData",
+                "kafka-cluster:DescribeTopic",
+                "kafka-cluster:DescribeGroup",
+                "kafka-cluster:Connect"
+            ],
+            "Resource": [
+                "arn:aws:kafka:*:<AWS ACCOUNT ID>:topic/<MSK serverless cluster name>/*",
+                "<MSK serverless cluster ARN>",
+                "arn:aws:kafka:*:<AWS ACCOUNT ID>:group/<MSK serverless cluster name>/*"
+            ]
+        },
+        {
+            "Sid": "Put",
+            "Effect": "Allow",
+            "Action": [
+                "dynamodb:PutItem"
+            ],
+            "Resource": "<DynamoDB table ARN>"
+        }
+    ]
+}

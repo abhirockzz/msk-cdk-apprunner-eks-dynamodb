@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: msk-iam-consumer-app
+  labels:
+    app: msk-iam-consumer-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: msk-iam-consumer-app
+  template:
+    metadata:
+      labels:
+        app: msk-iam-consumer-app
+    spec:
+      serviceAccountName: eks-app-sa
+      containers:
+      - name: msk-iam-consumer-app-container
+        image: <enter ECR image>
+        ports:
+        - name: http
+          containerPort: 8080
+        imagePullPolicy: Always
+        env:
+          - name: MSK_BROKER
+            value: <enter MSK cluster endpoint>
+          - name: MSK_TOPIC
+            value: test-topic
+          - name: DYNAMODB_TABLE
+            value: users
+          - name: AWS_REGION
+            value: <enter AWS region for DynamoDB e.g. us-east-1>
